@@ -1,0 +1,9 @@
+# ignore compiled output, debug files, dependencies and test results
+
+obj/
+bin/
+out/
+packages/
+TestResults/
+
+Logs/

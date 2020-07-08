@@ -1,0 +1,13 @@
+version: "3"
+services:
+    client:
+        build: ./frontend/
+        ports:
+            - "4200:80"
+    db:
+        image: "mcr.microsoft.com/mssql/server"
+        environment:
+            SA_PASSWORD: "Password1!"
+            ACCEPT_EULA: "Y"
+        ports:
+            - "5234:1433"

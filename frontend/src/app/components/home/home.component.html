@@ -1,0 +1,27 @@
+<h1>Welcome, {{ (userInfo$ | async)?.username }}</h1>
+
+<p *ngFor="let role of (userInfo$ | async)?.roles">
+  {{ role }}
+</p>
+
+<p>home works!</p>
+
+<div *ngFor="let item of (resources$ | async)">
+  <p>{{ item.name }}</p>
+  <p>{{ item.description }}</p>
+</div>
+
+<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+
+<mat-select [ngStyle]="{'width': '100px'}" placeholder="Select resource">
+  <mat-option *ngFor="let item of (resources$ | async)" [value]="item.name">
+    {{ item.name }}
+  </mat-option>
+</mat-select>
+<input type="file" capture="true" multiple accept=".jpg" placeholder="label" (change)="fileInputChanged($event)">
+<mat-form-field appearance="outline">
+  <mat-label>Name</mat-label>
+  <input matInput> 
+</mat-form-field>
+
+<button mat-raised-button (click)="openSnackBar('mesud')">Open snackbar!</button>
