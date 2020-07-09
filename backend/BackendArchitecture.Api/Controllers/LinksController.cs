@@ -1,5 +1,7 @@
 ﻿using BackendArchitecture.Api.Helpers;
 using BackendArchitecture.Api.Models;
+using BackendArchitecture.Api.Validators;
+using BackendArchitecture.Business;
 using BackendArchitecture.Entities;
 using BackendArchitecture.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -56,9 +58,16 @@ namespace BackendArchitecture.Api.Controllers
         {
             try
             {
+                if (!UriValidator.isValid(link.Uri))
+                {
+                    return BadRequest("Invalid Uri specified");
+                }
+
                 var userInfo = GetUserInfo();
 
                 link.UserId = userInfo.Id;
+                link.Uri = new UriHandler(link.Uri).GetNormalizedUri();
+
                 var createdLink = _linkRepository.Create(link);
 
                 return CreatedAtRoute("Link", new { id = createdLink.Id }, createdLink);

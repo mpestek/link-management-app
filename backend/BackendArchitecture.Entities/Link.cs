@@ -8,7 +8,7 @@ namespace BackendArchitecture.Entities
     {
         public Guid UserId { get; set; }
 
-        public string Value { get; set; }
+        public string Uri { get; set; }
 
         public ICollection<Tag> Tags { get; set; }
     }

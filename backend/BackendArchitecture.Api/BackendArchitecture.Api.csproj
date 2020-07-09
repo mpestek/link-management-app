@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BackendArchitecture.Business\BackendArchitecture.Business.csproj" />
     <ProjectReference Include="..\BackendArchitecture.Common\BackendArchitecture.Common.csproj" />
     <ProjectReference Include="..\BackendArchitecture.Entities\BackendArchitecture.Entities.csproj" />
     <ProjectReference Include="..\BackendArchitecture.Repositories\BackendArchitecture.Repositories.csproj" />
