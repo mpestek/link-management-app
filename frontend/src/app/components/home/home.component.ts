@@ -36,4 +36,8 @@ export class HomeComponent implements OnInit {
   openSnackBar(text) {
     this.snackBar.open(text, 'some action', { duration: 2000 });
   }
+
+  removeClicked(row) {
+    console.log(row);
+  }
 }

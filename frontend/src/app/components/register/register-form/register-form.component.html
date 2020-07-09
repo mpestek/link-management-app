@@ -1,0 +1,36 @@
+<form [formGroup]="formGroup" (submit)="register()">
+  <mat-form-field>
+    <input matInput formControlName="username" placeholder="Username">
+    <mat-error *ngIf="formGroup.controls.username.invalid">Username is invalid.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput 
+      formControlName="password" 
+      placeholder="Password"
+      type="password">
+      <mat-error *ngIf="formGroup.controls.password.invalid">Password is invalid.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput 
+      formControlName="confirmedPassword" 
+      placeholder="Confirm Password"
+      type="password">
+      <mat-error *ngIf="formGroup.controls.confirmedPassword.invalid">Password is invalid.</mat-error>
+  </mat-form-field>
+  <div>
+    Note: Password must contain at least one uppercase, digit, and non alphanumeric character.
+  </div>
+  <mat-form-field>
+    <input matInput formControlName="email" placeholder="Email" type="email">
+    <mat-error *ngIf="formGroup.controls.email.invalid">Email is invalid.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="firstName" placeholder="First Name">
+    <mat-error *ngIf="formGroup.controls.firstName.invalid">Name is invalid.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="lastName" placeholder="Last Name">
+    <mat-error *ngIf="formGroup.controls.lastName.invalid">Last name is invalid.</mat-error>
+  </mat-form-field>
+  <button mat-raised-button type="submit">Register</button>
+</form>

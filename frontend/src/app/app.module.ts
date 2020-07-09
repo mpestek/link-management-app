@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialCommonModule } from './material-common.module';
 import { LoginFormComponent } from './components/login/login-form/login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterFormComponent } from './components/register/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NotFoundComponent,
     LoginComponent,
     RegisterComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
