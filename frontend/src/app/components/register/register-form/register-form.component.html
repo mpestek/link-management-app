@@ -12,10 +12,10 @@
   </mat-form-field>
   <mat-form-field>
     <input matInput 
-      formControlName="confirmedPassword" 
+      formControlName="confirmPassword" 
       placeholder="Confirm Password"
       type="password">
-      <mat-error *ngIf="formGroup.controls.confirmedPassword.invalid">Password is invalid.</mat-error>
+      <mat-error *ngIf="formGroup.controls.confirmPassword.invalid">Password is invalid.</mat-error>
   </mat-form-field>
   <div>
     Note: Password must contain at least one uppercase, digit, and non alphanumeric character.

@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserInfo().pipe(
       catchError(() => {
-        this.router.navigate(['login']);
+        // this.router.navigate(['login']);
         return of();
       })
     ).subscribe();

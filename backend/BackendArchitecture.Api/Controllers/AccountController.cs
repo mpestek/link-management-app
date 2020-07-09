@@ -1,5 +1,6 @@
 ﻿using BackendArchitecture.Api.Helpers;
 using BackendArchitecture.Api.Models;
+using BackendArchitecture.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,14 +19,14 @@ namespace BackendArchitecture.Api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ILogger<AccountController> _logger;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IUserUtilities _userUtilities;
 
         public AccountController(
             ILogger<AccountController> logger,
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
             IUserUtilities userUtilities)
         {                                         
             _logger = logger;
@@ -68,7 +69,12 @@ namespace BackendArchitecture.Api.Controllers
                     return BadRequest("Password confirmation doesn't match.");
                 }
 
-                var user = new IdentityUser(registerUserInfo.Username);
+                var user = new User {
+                    UserName = registerUserInfo.Username,
+                    Email = registerUserInfo.Email,
+                    FirstName = registerUserInfo.FirstName,
+                    LastName = registerUserInfo.LastName
+                };
 
                 var registrationResult = await _userManager.CreateAsync(user, registerUserInfo.Password);
 

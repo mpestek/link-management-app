@@ -47,7 +47,7 @@ namespace BackendArchitecture.Api
                     Configuration["DatabaseConfiguration:ConnectionString"], 
                     builder => builder.MigrationsAssembly("BackendArchitecture.Api")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                     .AddEntityFrameworkStores<MyDatabaseDbContext>()
                     .AddDefaultTokenProviders();
 

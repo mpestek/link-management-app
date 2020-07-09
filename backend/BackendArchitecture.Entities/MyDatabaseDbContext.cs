@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BackendArchitecture.Entities
 {
-    public class MyDatabaseDbContext : IdentityDbContext
+    public class MyDatabaseDbContext : IdentityDbContext<User>
     {
         public MyDatabaseDbContext(DbContextOptions options)
             : base(options)
@@ -23,25 +23,25 @@ namespace BackendArchitecture.Entities
             base.OnModelCreating(builder);
 
             // Users
-            var userAdmin = new IdentityUser()
+            var userAdmin = new User()
             {
                 Id = Guid.NewGuid().ToString(),
                 UserName = "admin",
                 NormalizedUserName = "ADMIN"
             };
 
-            userAdmin.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(userAdmin, "Admin123!");
+            userAdmin.PasswordHash = new PasswordHasher<User>().HashPassword(userAdmin, "Admin123!");
 
-            var userMesud = new IdentityUser()
+            var userMesud = new User()
             {
                 Id = Guid.NewGuid().ToString(),
                 UserName = "Mesud",
                 NormalizedUserName = "MESUD"
             };
 
-            userMesud.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(userMesud, "Mesud123!");
+            userMesud.PasswordHash = new PasswordHasher<User>().HashPassword(userMesud, "Mesud123!");
 
-            builder.Entity<IdentityUser>().HasData(new IdentityUser[] {
+            builder.Entity<User>().HasData(new User[] {
                  userAdmin,
                  userMesud
             });

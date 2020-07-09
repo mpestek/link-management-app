@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendArchitecture.Api.Migrations
 {
     [DbContext(typeof(MyDatabaseDbContext))]
-    [Migration("20200707202207_Initial")]
-    partial class Initial
+    [Migration("20200709075411_AddedFieldsToUser")]
+    partial class AddedFieldsToUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,72 +38,7 @@ namespace BackendArchitecture.Api.Migrations
                     b.ToTable("Resources");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "c6db043d-8c08-4a9f-92fb-6d427ce61b5b",
-                            ConcurrencyStamp = "7b60cdb0-b444-4e93-afe4-e6280d354d78",
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = "4abf8b76-7b0e-478e-afe2-68f72d5df6f5",
-                            ConcurrencyStamp = "076590d6-a70d-4964-ac9a-4d33dc9b1017",
-                            Name = "User"
-                        });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+            modelBuilder.Entity("BackendArchitecture.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -121,6 +56,12 @@ namespace BackendArchitecture.Api.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -170,31 +111,97 @@ namespace BackendArchitecture.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d8fbd8e9-bed6-4853-ac57-8e3731528995",
+                            Id = "10feeeda-ab6f-42a7-bfd6-7373db33293e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d30a24cc-48bb-49dc-9dbf-153947b36e51",
+                            ConcurrencyStamp = "a7fd2e03-f5ea-45ba-ba7b-5ec613f45f21",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEiBU3/OYSJpIdM3dzc8irBJSbPiBjHZEAS/X7gz+Q/Tfwi7yGAd0AqKuUjEmop0BA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG1fxY5uK8lLF1xRLzsuE0cmpQdDKyt8EC6+5rH4s/yphFZhmkR/UJPTlXpvtkFEGg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "748f2054-959b-44c2-90b4-d866f90a00a6",
+                            SecurityStamp = "2ce10e8f-e0a0-42e4-9e93-7516597ad1b6",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "0af03120-0859-48c6-8b0a-2358458f0944",
+                            Id = "2cbde09c-e282-466d-8470-8efab82f6024",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5650adca-69f8-422c-8449-292955229267",
+                            ConcurrencyStamp = "edff5471-d929-4b45-832e-cef31d99806b",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "MESUD",
+                            PasswordHash = "AQAAAAEAACcQAAAAENjWipv3niXny+SvHakjQ7W/NeS+nM28QZh1WLK2HAtlUdYfG9tzqaONW1Ox5m9DbA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9de2abf3-ff95-47cf-9dc4-28dbe512b798",
+                            SecurityStamp = "6b04f0eb-2483-4169-ab67-2489a375761e",
                             TwoFactorEnabled = false,
                             UserName = "Mesud"
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "58a92aae-eb18-49a7-a801-00de8ab3110a",
+                            ConcurrencyStamp = "12729253-1a4f-4373-85f1-5d0fb5401ecd",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = "177766cb-7167-4a7b-9b10-44c68c2e7d71",
+                            ConcurrencyStamp = "c3797a28-03c2-48dc-ad3e-a6436658fa7e",
+                            Name = "User"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -260,18 +267,18 @@ namespace BackendArchitecture.Api.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d8fbd8e9-bed6-4853-ac57-8e3731528995",
-                            RoleId = "c6db043d-8c08-4a9f-92fb-6d427ce61b5b"
+                            UserId = "10feeeda-ab6f-42a7-bfd6-7373db33293e",
+                            RoleId = "58a92aae-eb18-49a7-a801-00de8ab3110a"
                         },
                         new
                         {
-                            UserId = "d8fbd8e9-bed6-4853-ac57-8e3731528995",
-                            RoleId = "4abf8b76-7b0e-478e-afe2-68f72d5df6f5"
+                            UserId = "10feeeda-ab6f-42a7-bfd6-7373db33293e",
+                            RoleId = "177766cb-7167-4a7b-9b10-44c68c2e7d71"
                         },
                         new
                         {
-                            UserId = "0af03120-0859-48c6-8b0a-2358458f0944",
-                            RoleId = "4abf8b76-7b0e-478e-afe2-68f72d5df6f5"
+                            UserId = "2cbde09c-e282-466d-8470-8efab82f6024",
+                            RoleId = "177766cb-7167-4a7b-9b10-44c68c2e7d71"
                         });
                 });
 
@@ -305,7 +312,7 @@ namespace BackendArchitecture.Api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("BackendArchitecture.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -314,7 +321,7 @@ namespace BackendArchitecture.Api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("BackendArchitecture.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -329,7 +336,7 @@ namespace BackendArchitecture.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("BackendArchitecture.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -338,7 +345,7 @@ namespace BackendArchitecture.Api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("BackendArchitecture.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

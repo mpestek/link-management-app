@@ -24,5 +24,9 @@
     <ProjectReference Include="..\BackendArchitecture.Repositories\BackendArchitecture.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 
 </Project>
