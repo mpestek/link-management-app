@@ -45,7 +45,9 @@ namespace BackendArchitecture.Business
 
             queryParams.Sort();
 
-            return "lol";
+            string resultingQuery = queryParams.Aggregate((first, second) => $"{first}&{second}");
+
+            return $"{_uri.Scheme}://{_uri.Host}{_uri.LocalPath}?{resultingQuery}";
         }
     }
 }

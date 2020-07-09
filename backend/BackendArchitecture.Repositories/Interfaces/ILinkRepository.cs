@@ -8,5 +8,7 @@ namespace BackendArchitecture.Repositories.Interfaces
     public interface ILinkRepository : IBaseRepository<Link>
     {
         List<Link> GetLinksForUser(Guid userId);
+
+        List<string> GetSuggestedTags(string uri);
     }
 }

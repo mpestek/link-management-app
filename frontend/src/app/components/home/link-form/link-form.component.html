@@ -1,0 +1,30 @@
+<form [formGroup]="formGroup" (submit)="create()">
+  <mat-form-field>
+    <input matInput formControlName="uri" placeholder="Url">
+    <mat-error *ngIf="formGroup.controls.uri.invalid">Uri is invalid.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-chip-list #chipList aria-label="Tag selection">
+      <mat-chip
+        *ngFor="let tag of formGroup.controls.tags.value"
+        [selectable]="false"
+        [removable]="true"
+        (removed)="remove(tag)">
+        {{tag}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="New tag..."
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let tag of filteredtags | async" [value]="tag">
+        {{ tag }}
+      </mat-option>
+    </mat-autocomplete> -->
+    <mat-error *ngIf="formGroup.controls.tags.invalid">Add at least one chip.</mat-error>
+  </mat-form-field>
+  <button mat-raised-button type="submit">Create</button>
+</form>

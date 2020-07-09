@@ -17,10 +17,29 @@ namespace BackendArchitecture.Repositories
 
         public List<Link> GetLinksForUser(Guid userId)
         {
-            return _dbContext.Links
+            var links = _dbContext.Links
                 .Where(link => link.UserId == userId)
                 .Include(link => link.Tags)
                 .ToList();
+
+            links.Reverse();
+
+            return links;
+        }
+
+        public List<string> GetSuggestedTags(string uri)
+        {
+            var tags = _dbContext.Links
+                .Where(link => link.Uri == uri)
+                .Include(link => link.Tags)
+                .SelectMany(link => link.Tags)
+                .GroupBy(tag => tag.Name)
+                .Select(tagGroup => new { Name = tagGroup.Key, Count = tagGroup.Count() })
+                .OrderByDescending(tagGroup => tagGroup.Count)
+                .Select(tagGroup => tagGroup.Name)
+                .ToList();
+
+            return tags;
         }
     }
 }

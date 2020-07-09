@@ -14,6 +14,7 @@ import { MaterialCommonModule } from './material-common.module';
 import { LoginFormComponent } from './components/login/login-form/login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './components/register/register-form/register-form.component';
+import { LinkFormComponent } from './components/home/link-form/link-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RegisterFormComponent } from './components/register/register-form/regis
     LoginComponent,
     RegisterComponent,
     LoginFormComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    LinkFormComponent
   ],
   imports: [
     BrowserModule,

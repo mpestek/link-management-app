@@ -9,6 +9,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatListModule } from '@angular/material/list';
 
 const materialModules = [
   MatSliderModule,
@@ -20,7 +23,10 @@ const materialModules = [
   MatSelectModule,
   MatInputModule,
   MatSnackBarModule,
-  MatTableModule
+  MatTableModule,
+  MatChipsModule,
+  MatAutocompleteModule,
+  MatListModule
 ];
 
 @NgModule({

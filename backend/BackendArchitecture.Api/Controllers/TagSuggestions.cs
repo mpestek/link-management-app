@@ -19,14 +19,14 @@ namespace BackendArchitecture.Api.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("links")]
-    public class LinksController : ControllerBase
+    [Route("suggest-tags")]
+    public class TagSuggestionsController : ControllerBase
     {
         private readonly ILogger<LinksController> _logger;
         private readonly ILinkRepository _linkRepository;
         private readonly IUserUtilities _userUtilities;
 
-        public LinksController(
+        public TagSuggestionsController(
             ILogger<LinksController> logger,
             ILinkRepository linkRepository,
             IUserUtilities userUtilities)
@@ -36,44 +36,19 @@ namespace BackendArchitecture.Api.Controllers
             _userUtilities = userUtilities;
         }
 
-        [HttpGet(Name = "Link")]
-        public ActionResult<IEnumerable<Link>> GetAll()
-        {
-            try
-            {
-                var userInfo = GetUserInfo();
-
-                return _linkRepository.GetLinksForUser(userInfo.Id);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.ToString());
-
-                return StatusCode(500);
-            }
-        }
-
         [HttpPost]
-        public ActionResult<IEnumerable<Link>> Post([FromBody] Link link)
+        public ActionResult<IEnumerable<string>> Get([FromBody]string uri)
         {
             try
             {
-                if (!LinkValidator.isValid(link))
+                if (!UriValidator.isValid(uri))
                 {
-                    return BadRequest(@"
-                        Invalid Link specified!
-                        Check that the Uri is valid and that the link contains at least one tag!
-                    ");
+                    return BadRequest("Invalid uri.");
                 }
 
-                var userInfo = GetUserInfo();
+                string normalizedUri = new UriHandler(uri).GetNormalizedUri();
 
-                link.UserId = userInfo.Id;
-                link.Uri = new UriHandler(link.Uri).GetNormalizedUri();
-
-                var createdLink = _linkRepository.Create(link);
-
-                return CreatedAtRoute("Link", new { id = createdLink.Id }, createdLink);
+                return _linkRepository.GetSuggestedTags(normalizedUri);
             }
             catch (Exception e)
             {
@@ -81,11 +56,6 @@ namespace BackendArchitecture.Api.Controllers
 
                 return StatusCode(500);
             }
-        }
-
-        private UserInfo GetUserInfo()
-        {
-            return _userUtilities.GetUserInfo(HttpContext.User);
         }
     }
 }
