@@ -14,16 +14,19 @@
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
       <input
+        #tagInput
+        [formControl]="tagCtrl"
         placeholder="New tag..."
+        [matAutocomplete]="auto"
         [matChipInputFor]="chipList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         (matChipInputTokenEnd)="add($event)">
     </mat-chip-list>
-    <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let tag of filteredtags | async" [value]="tag">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let tag of (suggestedTags$ | async)" [value]="tag">
         {{ tag }}
       </mat-option>
-    </mat-autocomplete> -->
+    </mat-autocomplete>
     <mat-error *ngIf="formGroup.controls.tags.invalid">Add at least one chip.</mat-error>
   </mat-form-field>
   <button mat-raised-button type="submit">Create</button>

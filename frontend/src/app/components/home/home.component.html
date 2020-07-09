@@ -4,8 +4,9 @@
 </header>
 
 <app-link-form
-  (onSubmit)="createLink($event)"></app-link-form>
-
+  (onSubmit)="createLink($event)"
+  [suggestedTags$]="suggestedTags$"
+  (uriChanged)="uriChanged($event)"></app-link-form>
 
 <table mat-table #table [dataSource]="(links$ | async)">
   <ng-container matColumnDef="id">
