@@ -19,7 +19,7 @@ namespace BackendArchitecture.Api.Helpers
 
             return new UserInfo()
             {
-                Id = userPrincipal.FindFirstValue(ClaimTypes.NameIdentifier),
+                Id = new Guid(userPrincipal.FindFirstValue(ClaimTypes.NameIdentifier)),
                 Username = userPrincipal.FindFirstValue(ClaimTypes.Name),
                 Roles = userPrincipal.FindAll(ClaimTypes.Role)
                                      .Select(roleClaim => roleClaim.Value)

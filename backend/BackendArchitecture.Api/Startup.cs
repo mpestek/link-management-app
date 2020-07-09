@@ -62,6 +62,7 @@ namespace BackendArchitecture.Api
             });
 
             services.AddScoped<IUserUtilities, UserUtilities>();
+            services.AddScoped<ILinkRepository, LinkRepository>();
             services.AddScoped<IResourceRepository, ResourceRepository>();
         }
 

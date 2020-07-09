@@ -10,8 +10,8 @@ namespace BackendArchitecture.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : EntityBase, new()
     {
-        private readonly DbContext _dbContext;
-        public BaseRepository(DbContext dbContext)
+        protected readonly MyDatabaseDbContext _dbContext;
+        public BaseRepository(MyDatabaseDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -4,14 +4,16 @@ using BackendArchitecture.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BackendArchitecture.Api.Migrations
 {
     [DbContext(typeof(MyDatabaseDbContext))]
-    partial class MyDatabaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200709082757_CreatedLinks")]
+    partial class CreatedLinks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,25 +53,6 @@ namespace BackendArchitecture.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Resources");
-                });
-
-            modelBuilder.Entity("BackendArchitecture.Entities.Tag", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("LinkId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LinkId");
-
-                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("BackendArchitecture.Entities.User", b =>
@@ -145,29 +128,29 @@ namespace BackendArchitecture.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8347d626-9a7b-4cf0-bfba-c71e73921f14",
+                            Id = "c283691d-122b-42a2-980c-8630b9f6bff0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "896e07ab-13e1-465a-9056-07bd0b590319",
+                            ConcurrencyStamp = "71bd359f-c13b-4efa-9f78-b575f512e556",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMQSnUlWPJ6b4/LfyfV0LzNTygr7L+CyuwbgE+N8ORtRBgRe8mMKSESFTCD9aYfZuQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHuOyo4YZVwu0sO1Wx2N6Ntmm504K7MUIzQMCmC6eTcv+mEUodiOqFUPpqi2Q5vHBg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "73683abb-72ed-4b0f-9f3e-01077aaee011",
+                            SecurityStamp = "8007a273-6928-4e16-81ec-dbecd17d8938",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "c25767e3-daf9-4c42-8509-31ea4d1f16c7",
+                            Id = "ccc70bff-d7d4-4fc1-afbb-ffc364817fad",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6fc30dc3-efa0-4351-ac90-781d0ee16d5b",
+                            ConcurrencyStamp = "4d90abce-8578-4358-b627-477249d69daf",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "MESUD",
-                            PasswordHash = "AQAAAAEAACcQAAAAECJy5sGVBc9KjyU8eA9jywbJJlbjHdRwtpeziO4QrneZZcAXge6304xoaF8NzwZw1g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBsv0TXgl1UNd4sl9iJk93QnF/SABcWpLiD79pFoGDE9rJWAWKxvb+rKYRUA0Pf8ZQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c4376494-7e09-4bd1-8090-82783732c945",
+                            SecurityStamp = "c439f9db-2b2e-4338-9b01-c455b7bac431",
                             TwoFactorEnabled = false,
                             UserName = "Mesud"
                         });
@@ -202,14 +185,14 @@ namespace BackendArchitecture.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "991d2cb6-1a95-4107-9252-a30f8f73bb5d",
-                            ConcurrencyStamp = "cae90cfd-9083-47de-a8af-b27ef17a15cf",
+                            Id = "9da84d58-a8c1-4a38-b335-2544f5e09dfa",
+                            ConcurrencyStamp = "b8089c93-6ec5-465e-b023-905f855fd855",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "8f2393c3-f433-485d-b1a8-3ee3ed51b0c1",
-                            ConcurrencyStamp = "397e21f8-d645-4eaa-926c-a994c87e166c",
+                            Id = "53684ba1-2e6b-4f10-979b-08e3c3f2af2a",
+                            ConcurrencyStamp = "4dfb63c0-0c4b-4a38-8799-6d8c89267241",
                             Name = "User"
                         });
                 });
@@ -301,18 +284,18 @@ namespace BackendArchitecture.Api.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "8347d626-9a7b-4cf0-bfba-c71e73921f14",
-                            RoleId = "991d2cb6-1a95-4107-9252-a30f8f73bb5d"
+                            UserId = "c283691d-122b-42a2-980c-8630b9f6bff0",
+                            RoleId = "9da84d58-a8c1-4a38-b335-2544f5e09dfa"
                         },
                         new
                         {
-                            UserId = "8347d626-9a7b-4cf0-bfba-c71e73921f14",
-                            RoleId = "8f2393c3-f433-485d-b1a8-3ee3ed51b0c1"
+                            UserId = "c283691d-122b-42a2-980c-8630b9f6bff0",
+                            RoleId = "53684ba1-2e6b-4f10-979b-08e3c3f2af2a"
                         },
                         new
                         {
-                            UserId = "c25767e3-daf9-4c42-8509-31ea4d1f16c7",
-                            RoleId = "8f2393c3-f433-485d-b1a8-3ee3ed51b0c1"
+                            UserId = "ccc70bff-d7d4-4fc1-afbb-ffc364817fad",
+                            RoleId = "53684ba1-2e6b-4f10-979b-08e3c3f2af2a"
                         });
                 });
 
@@ -333,13 +316,6 @@ namespace BackendArchitecture.Api.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("BackendArchitecture.Entities.Tag", b =>
-                {
-                    b.HasOne("BackendArchitecture.Entities.Link", "Link")
-                        .WithMany("Tags")
-                        .HasForeignKey("LinkId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { UserInfo } from '../../models/user-info.model';
 import { ResourceStore } from '../../stores/resource.store';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { withLatestFrom, tap } from 'rxjs/operators';
+import { withLatestFrom, tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -55,5 +55,15 @@ export class HomeComponent implements OnInit {
 
   removeClicked(row) {
     console.log(row);
+  }
+
+  logout() {
+    this.userService.logout().pipe(
+      tap(() => this.router.navigate(['login']),
+      catchError(() => {
+        console.log('Logout failed.');
+        return of();
+      })
+    )).subscribe();
   }
 }

@@ -1,5 +1,7 @@
-<h1>Welcome, {{ (userInfo$ | async)?.username }}</h1>
-
+<header>
+  <h1>Welcome, {{ (userInfo$ | async)?.username }}</h1>
+  <button (click)="logout()">Logout</button>
+</header>
 <p *ngFor="let role of (userInfo$ | async)?.roles">
   {{ role }}
 </p>
