@@ -44,7 +44,7 @@ namespace BackendArchitecture.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<IEnumerable<string>> Get([FromBody]string uri)
+        public ActionResult<IEnumerable<string>> Get([FromBody]string uri, [FromQuery]bool isFromAnalysis = true)
         {
             try
             {
@@ -55,7 +55,12 @@ namespace BackendArchitecture.Api.Controllers
 
                 string normalizedUri = _uriHandler.GetNormalizedUri(uri);
 
-                return _linkRepository.GetSuggestedTags(normalizedUri);
+                if (!isFromAnalysis)
+                {
+                    return _linkRepository.GetSuggestedTags(normalizedUri);
+                }
+
+                return _linkRepository.GetSuggestedTagsFromAnalysis(normalizedUri);
             }
             catch (Exception e)
             {

@@ -10,5 +10,7 @@ namespace BackendArchitecture.Repositories.Interfaces
         List<Link> GetLinksForUser(Guid userId);
 
         List<string> GetSuggestedTags(string uri);
+
+        List<string> GetSuggestedTagsFromAnalysis(string uri);
     }
 }

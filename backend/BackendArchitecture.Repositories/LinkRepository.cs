@@ -41,5 +41,20 @@ namespace BackendArchitecture.Repositories
 
             return tags;
         }
+
+        public List<string> GetSuggestedTagsFromAnalysis(string uri)
+        {
+            var tags = _dbContext.Links
+                .Where(link => link.Uri == uri)
+                .Include(link => link.AnalysisTagResults)
+                .SelectMany(link => link.AnalysisTagResults)
+                .GroupBy(tag => tag.Name)
+                .Select(tagGroup => new { Name = tagGroup.Key, Count = tagGroup.Sum(tagGroup => tagGroup.Ocurrences) })
+                .OrderByDescending(tagGroup => tagGroup.Count)
+                .Select(tagGroup => tagGroup.Name)
+                .ToList();
+
+            return tags;
+        }
     }
 }
