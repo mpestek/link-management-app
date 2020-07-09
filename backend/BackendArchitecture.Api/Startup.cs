@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BackendArchitecture.Api.Helpers;
+using BackendArchitecture.Api.Validators;
+using BackendArchitecture.Api.Validators.Interfaces;
+using BackendArchitecture.Business;
 using BackendArchitecture.Common;
 using BackendArchitecture.Entities;
 using BackendArchitecture.Repositories;
@@ -62,6 +65,12 @@ namespace BackendArchitecture.Api
             });
 
             services.AddScoped<IUserUtilities, UserUtilities>();
+
+            services.AddScoped<ILinkValidator, LinkValidator>();
+            services.AddScoped<IUriValidator, UriValidator>();
+
+            services.AddScoped<IUriHandler, UriHandler>();
+
             services.AddScoped<ILinkRepository, LinkRepository>();
             services.AddScoped<IResourceRepository, ResourceRepository>();
         }

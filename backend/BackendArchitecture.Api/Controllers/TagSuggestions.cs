@@ -1,6 +1,7 @@
 ﻿using BackendArchitecture.Api.Helpers;
 using BackendArchitecture.Api.Models;
 using BackendArchitecture.Api.Validators;
+using BackendArchitecture.Api.Validators.Interfaces;
 using BackendArchitecture.Business;
 using BackendArchitecture.Entities;
 using BackendArchitecture.Repositories.Interfaces;
@@ -25,15 +26,21 @@ namespace BackendArchitecture.Api.Controllers
         private readonly ILogger<LinksController> _logger;
         private readonly ILinkRepository _linkRepository;
         private readonly IUserUtilities _userUtilities;
+        private readonly IUriValidator _uriValidator;
+        private readonly IUriHandler _uriHandler;
 
         public TagSuggestionsController(
             ILogger<LinksController> logger,
             ILinkRepository linkRepository,
-            IUserUtilities userUtilities)
+            IUserUtilities userUtilities,
+            IUriValidator uriValidator,
+            IUriHandler uriHandler)
         {
             _logger = logger;
             _linkRepository = linkRepository;
             _userUtilities = userUtilities;
+            _uriValidator = uriValidator;
+            _uriHandler = uriHandler;
         }
 
         [HttpPost]
@@ -41,12 +48,12 @@ namespace BackendArchitecture.Api.Controllers
         {
             try
             {
-                if (!UriValidator.isValid(uri))
+                if (!_uriValidator.isValid(uri))
                 {
                     return BadRequest("Invalid uri.");
                 }
 
-                string normalizedUri = new UriHandler(uri).GetNormalizedUri();
+                string normalizedUri = _uriHandler.GetNormalizedUri(uri);
 
                 return _linkRepository.GetSuggestedTags(normalizedUri);
             }

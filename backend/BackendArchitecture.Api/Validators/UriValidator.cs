@@ -1,13 +1,14 @@
-﻿using System;
+﻿using BackendArchitecture.Api.Validators.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace BackendArchitecture.Api.Validators
 {
-    public static class UriValidator
+    public class UriValidator : IUriValidator
     {
-        public static bool isValid(string uri)
+        public bool isValid(string uri)
         {
             Uri validatedUri;
 

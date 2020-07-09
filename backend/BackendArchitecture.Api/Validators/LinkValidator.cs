@@ -1,4 +1,5 @@
-﻿using BackendArchitecture.Entities;
+﻿using BackendArchitecture.Api.Validators.Interfaces;
+using BackendArchitecture.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +7,17 @@ using System.Threading.Tasks;
 
 namespace BackendArchitecture.Api.Validators
 {
-    public static class LinkValidator
+    public class LinkValidator : ILinkValidator
     {
-        public static bool isValid(Link link)
+        private readonly IUriValidator _uriValidator;
+        public LinkValidator(IUriValidator uriValidator)
         {
-            return UriValidator.isValid(link.Uri) && link.Tags.Count > 0;
+            _uriValidator = uriValidator;
+        }
+
+        public bool isValid(Link link)
+        {
+            return _uriValidator.isValid(link.Uri) && link.Tags.Count > 0;
         }
     }
 }

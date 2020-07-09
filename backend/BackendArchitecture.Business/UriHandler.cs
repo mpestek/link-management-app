@@ -5,15 +5,8 @@ using System.Text;
 
 namespace BackendArchitecture.Business
 {
-    public class UriHandler
+    public class UriHandler : IUriHandler
     {
-        private readonly Uri _uri;
-
-        public UriHandler(string uri)
-        {
-            _uri = ValidateAndInstantiateUri(uri);
-        }
-
         private Uri ValidateAndInstantiateUri(string uri)
         {
             Uri validatedUri;
@@ -33,21 +26,24 @@ namespace BackendArchitecture.Business
             return validatedUri;
         }
 
-        public string GetNormalizedUri()
+        public string GetNormalizedUri(string uri)
         {
-            if (String.IsNullOrEmpty(_uri.Query))
+            Uri validatedUri = ValidateAndInstantiateUri(uri);
+
+            if (String.IsNullOrEmpty(validatedUri.Query))
             {
-                return _uri.ToString();
+                return validatedUri.ToString();
             }
 
-            string query = _uri.Query.Trim('?');
+            string query = validatedUri.Query.Trim('?');
             List<string> queryParams = query.Split('&').ToList();
 
+            // Sorting query params so that different order doesn't result in different URIs
             queryParams.Sort();
 
             string resultingQuery = queryParams.Aggregate((first, second) => $"{first}&{second}");
 
-            return $"{_uri.Scheme}://{_uri.Host}{_uri.LocalPath}?{resultingQuery}";
+            return $"{validatedUri.Scheme}://{validatedUri.Host}{validatedUri.LocalPath}?{resultingQuery}";
         }
     }
 }

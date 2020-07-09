@@ -1,6 +1,7 @@
 ﻿using BackendArchitecture.Api.Helpers;
 using BackendArchitecture.Api.Models;
 using BackendArchitecture.Api.Validators;
+using BackendArchitecture.Api.Validators.Interfaces;
 using BackendArchitecture.Business;
 using BackendArchitecture.Entities;
 using BackendArchitecture.Repositories.Interfaces;
@@ -25,15 +26,21 @@ namespace BackendArchitecture.Api.Controllers
         private readonly ILogger<LinksController> _logger;
         private readonly ILinkRepository _linkRepository;
         private readonly IUserUtilities _userUtilities;
+        private readonly ILinkValidator _linkValidator;
+        private readonly IUriHandler _uriHandler;
 
         public LinksController(
             ILogger<LinksController> logger,
             ILinkRepository linkRepository,
-            IUserUtilities userUtilities)
+            IUserUtilities userUtilities,
+            ILinkValidator linkValidator,
+            IUriHandler uriHandler)
         {
             _logger = logger;
             _linkRepository = linkRepository;
             _userUtilities = userUtilities;
+            _linkValidator = linkValidator;
+            _uriHandler = uriHandler;
         }
 
         [HttpGet(Name = "Link")]
@@ -58,7 +65,7 @@ namespace BackendArchitecture.Api.Controllers
         {
             try
             {
-                if (!LinkValidator.isValid(link))
+                if (!_linkValidator.isValid(link))
                 {
                     return BadRequest(@"
                         Invalid Link specified!
@@ -69,7 +76,7 @@ namespace BackendArchitecture.Api.Controllers
                 var userInfo = GetUserInfo();
 
                 link.UserId = userInfo.Id;
-                link.Uri = new UriHandler(link.Uri).GetNormalizedUri();
+                link.Uri = _uriHandler.GetNormalizedUri(link.Uri);
 
                 var createdLink = _linkRepository.Create(link);
 
