@@ -74,7 +74,6 @@ namespace BackendArchitecture.Api
             services.AddScoped<IUriAnalyzer, UriAnalyzer>();
 
             services.AddScoped<ILinkRepository, LinkRepository>();
-            services.AddScoped<IResourceRepository, ResourceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

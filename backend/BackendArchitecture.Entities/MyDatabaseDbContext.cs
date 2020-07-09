@@ -16,8 +16,6 @@ namespace BackendArchitecture.Entities
         
         }
 
-        public DbSet<Resource> Resources { get; set; }
-
         public DbSet<Link> Links { get; set; }
 
         public DbSet<Tag> Tags { get; set; }

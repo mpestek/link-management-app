@@ -1,4 +1,7 @@
 <form [formGroup]="formGroup" (submit)="create()">
+  <mat-checkbox 
+  [formControl]="getFromAnalysisControl"
+  [ngStyle]="{'margin-left': '30px'}">Get Suggestion from analysis</mat-checkbox>
   <mat-form-field>
     <input matInput formControlName="uri" placeholder="Url">
     <mat-error *ngIf="formGroup.controls.uri.invalid">Uri is invalid.</mat-error>

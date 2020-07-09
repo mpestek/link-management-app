@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ResourceService } from '../services/resource.service';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LinkService } from '../services/link.service';
@@ -21,8 +20,6 @@ export class LinkStore {
   }
 
   addLink(link: Link) {
-    console.log(`store`);
-    console.log(link);
     return this.linkService.create(link).pipe(
       tap((createdLink: any) => this._linksSubject$.next([
         {

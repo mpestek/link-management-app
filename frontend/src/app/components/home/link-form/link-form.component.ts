@@ -23,8 +23,9 @@ export class LinkFormComponent implements OnInit, OnDestroy {
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   tagCtrl = new FormControl();
+  getFromAnalysisControl = new FormControl(false);
 
-  sub: Subscription;
+  subs: Subscription[] = [];
 
   constructor(
     private formBuilder: FormBuilder
@@ -33,14 +34,23 @@ export class LinkFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.createForm();
     this.setUpUriChangeSubscription();
+
+    this.subs.push(
+      this.getFromAnalysisControl.valueChanges.subscribe(
+        newValue => this.uriChanged.emit({
+          newUri: this.formGroup.controls.uri.value,
+          isFromAnalysis: newValue
+        })
+      )
+    );
   }
 
   setUpUriChangeSubscription() {
-    this.sub = this.formGroup.controls.uri.valueChanges.pipe(
+    this.subs.push(this.formGroup.controls.uri.valueChanges.pipe(
       debounceTime(500)
     ).subscribe(newValue => 
-      this.uriChanged.emit(newValue)
-    );
+      this.uriChanged.emit({ newUri: newValue, isFromAnalysis: this.getFromAnalysisControl.value })
+    ));
   }
 
   createForm() {
@@ -55,8 +65,6 @@ export class LinkFormComponent implements OnInit, OnDestroy {
   }
 
   create() {
-    console.log(this.formGroup.value);
-    console.log(this.formGroup.valid);
     if (this.formGroup.valid) {
       this.onSubmit.emit(this.formGroup.value);
     }
@@ -92,6 +100,8 @@ export class LinkFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub && this.sub.unsubscribe();
+    this.subs && 
+    this.subs.length && 
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 }

@@ -9,8 +9,8 @@ export class TagSuggestionService {
     
     private readonly apiUrl = "https://localhost:5001/";
 
-    getSuggestions(uri) {
-      return this.httpClient.post(`${this.apiUrl}suggest-tags`, JSON.stringify(uri), {
+    getSuggestions(uri, isFromAnalysis) {
+      return this.httpClient.post(`${this.apiUrl}suggest-tags?isFromAnalysis=${isFromAnalysis}`, JSON.stringify(uri), {
         headers: { 'Content-Type': 'application/json' }
       });
     }

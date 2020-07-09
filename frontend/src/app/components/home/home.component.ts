@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Link } from '../../models/link.model';
 import { LinkStore } from '../../stores/link.store';
 import { TagSuggestionService } from '../../services/tag-suggestion.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,8 @@ export class HomeComponent implements OnInit {
   links$: Observable<Link[]>;
   suggestedTagsSubject$ = new BehaviorSubject<string[]>([]);
   suggestedTags$ = this.suggestedTagsSubject$.asObservable();
+
+  getFromAnalysisControl = new FormControl(false);
 
   constructor(
     private userService: UserService,
@@ -43,14 +46,12 @@ export class HomeComponent implements OnInit {
   }
 
   createLink(link: Link) {
-    console.log(`component`);
-    console.log(link);
     this.linkStore.addLink(link).subscribe();
   }
 
-  uriChanged(uri) {
+  uriChanged({ newUri, isFromAnalysis }) {
     this.tagSuggestionService
-      .getSuggestions(uri)
+      .getSuggestions(newUri, isFromAnalysis)
       .subscribe(
         (suggestedTags: string[]) => this.suggestedTagsSubject$.next(suggestedTags)
       )
