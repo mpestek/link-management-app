@@ -3,6 +3,7 @@ using BackendArchitecture.Api.Models;
 using BackendArchitecture.Api.Validators;
 using BackendArchitecture.Api.Validators.Interfaces;
 using BackendArchitecture.Business;
+using BackendArchitecture.Business.Interfaces;
 using BackendArchitecture.Entities;
 using BackendArchitecture.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -28,19 +29,22 @@ namespace BackendArchitecture.Api.Controllers
         private readonly IUserUtilities _userUtilities;
         private readonly ILinkValidator _linkValidator;
         private readonly IUriHandler _uriHandler;
+        private readonly IUriAnalyzer _uriAnalyzer;
 
         public LinksController(
             ILogger<LinksController> logger,
             ILinkRepository linkRepository,
             IUserUtilities userUtilities,
             ILinkValidator linkValidator,
-            IUriHandler uriHandler)
+            IUriHandler uriHandler,
+            IUriAnalyzer uriAnalyzer)
         {
             _logger = logger;
             _linkRepository = linkRepository;
             _userUtilities = userUtilities;
             _linkValidator = linkValidator;
             _uriHandler = uriHandler;
+            _uriAnalyzer = uriAnalyzer;
         }
 
         [HttpGet(Name = "Link")]
@@ -61,7 +65,7 @@ namespace BackendArchitecture.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<IEnumerable<Link>> Post([FromBody] Link link)
+        public async Task<ActionResult<IEnumerable<Link>>> Post([FromBody] Link link)
         {
             try
             {
@@ -78,6 +82,8 @@ namespace BackendArchitecture.Api.Controllers
                 link.UserId = userInfo.Id;
                 link.Uri = _uriHandler.GetNormalizedUri(link.Uri);
 
+                link.AnalysisTagResults = await _uriAnalyzer.AnalyzeKeywordOcurrences(link.Uri);
+                
                 var createdLink = _linkRepository.Create(link);
 
                 return CreatedAtRoute("Link", new { id = createdLink.Id }, createdLink);

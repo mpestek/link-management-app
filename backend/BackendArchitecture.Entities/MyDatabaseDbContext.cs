@@ -22,6 +22,8 @@ namespace BackendArchitecture.Entities
 
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<AnalysisTagResult> AnalysisTagResult { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

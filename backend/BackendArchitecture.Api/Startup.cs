@@ -6,6 +6,7 @@ using BackendArchitecture.Api.Helpers;
 using BackendArchitecture.Api.Validators;
 using BackendArchitecture.Api.Validators.Interfaces;
 using BackendArchitecture.Business;
+using BackendArchitecture.Business.Interfaces;
 using BackendArchitecture.Common;
 using BackendArchitecture.Entities;
 using BackendArchitecture.Repositories;
@@ -70,6 +71,7 @@ namespace BackendArchitecture.Api
             services.AddScoped<IUriValidator, UriValidator>();
 
             services.AddScoped<IUriHandler, UriHandler>();
+            services.AddScoped<IUriAnalyzer, UriAnalyzer>();
 
             services.AddScoped<ILinkRepository, LinkRepository>();
             services.AddScoped<IResourceRepository, ResourceRepository>();

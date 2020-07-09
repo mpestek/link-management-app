@@ -11,5 +11,7 @@ namespace BackendArchitecture.Entities
         public string Uri { get; set; }
 
         public ICollection<Tag> Tags { get; set; }
+
+        public ICollection<AnalysisTagResult> AnalysisTagResults { get; set; }
     }
 }
