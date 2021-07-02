@@ -15,7 +15,7 @@ This challenge was done over an 8 hr period.
 5. When the user adds a new link, the app does some analysis on it, based on which it suggests some tags. The analysis is done by fetching the HTML content from the link, counting keyword occurrences (excluding html tags and attributes). Based on that is suggests up to 10 tags to the user.
 
 
-### Steps to run ###
+## Steps to run ###
 
 To run the application quickly, you can use the docker-compose.yml file inside of the
 root folder. Run ``` docker-compose up ``` inside of the root folder.
