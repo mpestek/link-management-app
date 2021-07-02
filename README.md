@@ -1,5 +1,20 @@
 # Fullstack Challenge #
 
+This challenge was done over an 8 hr period.
+
+## Requirements
+1. User registration / login, supporting basic info like:
+  - Username
+  - Password
+  - Email
+  - First and Last name.
+
+2. Logged in users can add links to their "space", and assign tags to them, (e.g. sports, media, news, ...).
+3. The application considers two links equal, if they have the same address and query parameters, regardless of query param order.
+4. When a user adds an existing link, the app suggests tags that other users have used for the link, sorted by the number of occurrences.
+5. When the user adds a new link, the app does some analysis on it, based on which it suggests some tags. The analysis is done by fetching the HTML content from the link, counting keyword occurrences (excluding html tags and attributes). Based on that is suggests up to 10 tags to the user.
+
+
 ### Steps to run ###
 
 To run the application quickly, you can use the docker-compose.yml file inside of the
